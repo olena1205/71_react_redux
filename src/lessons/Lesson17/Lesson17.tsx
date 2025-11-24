@@ -9,7 +9,7 @@ import {
 } from "store/redux/counter/counterSlice"
 
 function Lesson17() {
-  // 11. Получаем ф-цию dispatch, которую возвращает хук aseAppDispatch
+  // 11. Получаем ф-цию dispatch, которую возвращает хук useAppDispatch
   const dispatch = useAppDispatch()
 
   // 12. Забираем значение counter из store
@@ -18,11 +18,11 @@ function Lesson17() {
   // 13. Вызываем dispatch и передаем в него вызов необходимых экшенов.
   // вызов dispatch нужно делать внутри ф-ции, которая срабатывает при клике на кнопку
   const onPlus = () => {
-    dispatch(counterActions.plus())
+    dispatch(counterActions.plus(10))
   }
 
   const onMinus = () => {
-    dispatch(counterActions.minus())
+    dispatch(counterActions.minus(5))
   }
 
   return (

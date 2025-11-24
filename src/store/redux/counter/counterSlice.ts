@@ -1,6 +1,7 @@
 // 1. Импортируем ф-цию, с помощью которой создаем slice
 import { createAppSlice } from "store/createAppSlice"
 import { CounterStateSlice } from "./types"
+import { PayloadAction } from "@reduxjs/toolkit"
 
 const counterInitialState: CounterStateSlice = {
   count: 0,
@@ -16,13 +17,18 @@ export const counterSlice = createAppSlice({
   initialState: counterInitialState,
   // 5. Создаем объект, внутри которого будут храниться reducers(ф-ции),
   // которые отвечают за изменение состояния
+
   reducers: create => ({
-    plus: create.reducer((state: CounterStateSlice) => {
-      state.count = state.count + 1
-    }),
-    minus: create.reducer((state: CounterStateSlice) => {
-      state.count = state.count - 1
-    }),
+    plus: create.reducer(
+      (state: CounterStateSlice, action: PayloadAction<number>) => {
+        state.count = state.count + action.payload
+      },
+    ),
+    minus: create.reducer(
+      (state: CounterStateSlice, action: PayloadAction<number>) => {
+        state.count = state.count - action.payload
+      },
+    ),
   }),
   // Шаг 6. Создаем селекторы, которые позволяют забрать данные из стейта в компонент
   selectors: {
@@ -31,8 +37,8 @@ export const counterSlice = createAppSlice({
 })
 
 // 7. Экспорт экшенов и селекторов для удобства их использования в компоненте
-export const counterActions = counterSlice.actions;
-export const counterSelectors = counterSlice.selectors;
+export const counterActions = counterSlice.actions
+export const counterSelectors = counterSlice.selectors
 
 // reducers: {
 // plus: ()=>{}
